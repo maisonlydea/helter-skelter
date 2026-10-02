@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Helter & Skelter — Another Bad Création</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&family=UnifrakturMaguntia&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #090909;
+      --bg-2: #111111;
+      --cream: #f3eee6;
+      --cream-dim: #d8d0c4;
+      --red: #9b2332;
+      --line: rgba(243, 238, 230, 0.14);
+      --muted: rgba(243, 238, 230, 0.62);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--cream);
+      font-family: Inter, system-ui, sans-serif;
+      font-weight: 300;
+      letter-spacing: 0.01em;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    button, .btn { font-family: inherit; cursor: pointer; }
+
+    .announce {
+      background: var(--cream);
+      color: #111;
+      text-align: center;
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      padding: 10px 16px;
+      font-weight: 500;
+    }
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      padding: 18px 36px;
+      background: rgba(9, 9, 9, 0.86);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--line);
+    }
+    nav { display: flex; gap: 28px; font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; }
+    nav a:hover { color: #fff; }
+    .brand {
+      font-family: "UnifrakturMaguntia", serif;
+      font-size: 28px;
+      letter-spacing: 0.04em;
+      text-align: center;
+    }
+    .brand span { color: var(--red); font-family: "Cormorant Garamond", serif; font-style: italic; font-size: 26px; margin: 0 4px; }
+    .header-right { display: flex; justify-content: flex-end; gap: 22px; font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; }
+
+    .hero {
+      min-height: 92vh;
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      border-bottom: 1px solid var(--line);
+    }
+    .hero-copy {
+      padding: 72px 64px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      background:
+        radial-gradient(ellipse at 20% 20%, rgba(155, 35, 50, 0.18), transparent 45%),
+        #0c0c0c;
+    }
+    .eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 22px;
+    }
+    h1 {
+      font-family: "Cormorant Garamond", serif;
+      font-weight: 500;
+      font-size: clamp(56px, 7vw, 108px);
+      line-height: 0.86;
+      letter-spacing: -0.03em;
+    }
+    h1 em { font-style: italic; color: var(--red); }
+    .hero p.lead {
+      max-width: 460px;
+      margin-top: 28px;
+      color: var(--cream-dim);
+      font-size: 16px;
+      line-height: 1.7;
+    }
+    .cta-row { display: flex; gap: 14px; margin-top: 36px; flex-wrap: wrap; }
+    .btn {
+      border: 1px solid var(--cream);
+      background: var(--cream);
+      color: #111;
+      padding: 14px 22px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-size: 11px;
+      font-weight: 500;
+    }
+    .btn.ghost { background: transparent; color: var(--cream); }
+    .hero-visual {
+      position: relative;
+      background: #161616;
+      overflow: hidden;
+    }
+    .hero-visual img { width: 100%; height: 100%; object-fit: cover; min-height: 640px; }
+    .badge {
+      position: absolute;
+      left: 24px;
+      bottom: 24px;
+      background: rgba(9,9,9,0.78);
+      border: 1px solid var(--line);
+      padding: 14px 16px;
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    section { padding: 88px 48px; }
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 36px;
+      gap: 20px;
+    }
+    .section-head h2 {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 48px;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+    }
+    .section-head p { color: var(--muted); font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+    .card {
+      background: #101010;
+      border: 1px solid var(--line);
+      overflow: hidden;
+    }
+    .card .media {
+      aspect-ratio: 4 / 5;
+      background: #1a1a1a;
+      overflow: hidden;
+    }
+    .card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+    .card:hover img { transform: scale(1.04); }
+    .card .info { padding: 16px 16px 18px; display: flex; justify-content: space-between; gap: 12px; align-items: flex-start; }
+    .card h3 { font-size: 14px; font-weight: 500; letter-spacing: 0.04em; }
+    .card .meta { color: var(--muted); font-size: 12px; margin-top: 6px; }
+    .price { font-size: 13px; letter-spacing: 0.04em; white-space: nowrap; }
+
+    .split {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      min-height: 640px;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+    .split img { width: 100%; height: 100%; object-fit: cover; min-height: 520px; }
+    .split-copy {
+      padding: 72px 64px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background: var(--bg-2);
+    }
+    .split-copy h2 {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 58px;
+      line-height: 0.92;
+      font-weight: 500;
+      margin: 12px 0 20px;
+    }
+    .split-copy p { color: var(--cream-dim); line-height: 1.75; max-width: 460px; }
+    .stats { display: flex; gap: 28px; margin-top: 32px; }
+    .stats strong { display: block; font-family: "Cormorant Garamond", serif; font-size: 32px; font-weight: 500; }
+    .stats span { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
+
+    .lookbook {
+      display: grid;
+      grid-template-columns: 1.3fr 0.7fr;
+      gap: 18px;
+    }
+    .lookbook .tall { position: relative; min-height: 720px; overflow: hidden; border: 1px solid var(--line); }
+    .lookbook .tall img, .stack img { width: 100%; height: 100%; object-fit: cover; }
+    .stack { display: grid; gap: 18px; }
+    .stack .tile { position: relative; min-height: 351px; overflow: hidden; border: 1px solid var(--line); }
+    .caption {
+      position: absolute;
+      left: 18px;
+      bottom: 18px;
+      background: rgba(9,9,9,0.72);
+      padding: 10px 12px;
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .drop {
+      background: #f3eee6;
+      color: #141414;
+    }
+    .drop .section-head p, .drop .meta { color: #5c564e; }
+    .drop .card { background: #fff; border-color: rgba(0,0,0,0.08); color: #141414; }
+
+    footer {
+      padding: 56px 48px 32px;
+      border-top: 1px solid var(--line);
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr 1fr;
+      gap: 28px;
+    }
+    footer h4 { font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 14px; }
+    footer a, footer p { color: var(--muted); font-size: 14px; line-height: 1.9; display: block; }
+    .legal {
+      grid-column: 1 / -1;
+      border-top: 1px solid var(--line);
+      margin-top: 18px;
+      padding-top: 18px;
+      display: flex;
+      justify-content: space-between;
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .note {
+      margin: 0 48px 48px;
+      border: 1px dashed rgba(243,238,230,0.25);
+      padding: 16px 18px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    @media (max-width: 980px) {
+      header { grid-template-columns: 1fr; gap: 12px; padding: 14px 18px; }
+      nav, .header-right { justify-content: center; }
+      .hero, .split, .lookbook, .grid, footer { grid-template-columns: 1fr; }
+      .hero-copy, .split-copy, section { padding: 40px 20px; }
+      .note { margin: 0 20px 28px; }
+      footer { padding: 40px 20px; }
+      .legal { flex-direction: column; gap: 8px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="announce">Drop 01 — livraison directe, sans stock · made to order</div>
+  <header>
+    <nav>
+      <a href="#shop">Shop</a>
+      <a href="#histoire">Histoire</a>
+      <a href="#lookbook">Lookbook</a>
+    </nav>
+    <a class="brand" href="#top">Helter <span>&</span> Skelter</a>
+    <div class="header-right">
+      <a href="#shop">Panier (0)</a>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero" style="padding:0">
+      <div class="hero-copy">
+        <div class="eyebrow">Another Bad Création · Paris</div>
+        <h1>50% harmonie<br /><em>50% chaos.</em></h1>
+        <p class="lead">Streetwear imprimé à la demande, expédié directement à tes clients. Pièces lourdes, visuels signature, étiquette à ta marque.</p>
+        <div class="cta-row">
+          <a class="btn" href="#shop">Voir le drop</a>
+          <a class="btn ghost" href="#histoire">La marque</a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <img src="assets/hoodie-creation.jpg" alt="Hoodie Another Bad Création" />
+        <div class="badge">Hoodie Création · noir · HS</div>
+      </div>
+    </section>
+
+    <section id="shop">
+      <div class="section-head">
+        <h2>Drop 01</h2>
+        <p>Hoodies & tees · impression dos</p>
+      </div>
+      <div class="grid">
+        <article class="card">
+          <div class="media"><img src="assets/hoodie-creation.jpg" alt="Hoodie Création" /></div>
+          <div class="info">
+            <div>
+              <h3>Hoodie Création</h3>
+              <div class="meta">Noir · arche classique · monogramme HS</div>
+            </div>
+            <div class="price">89 €</div>
+          </div>
+        </article>
+        <article class="card">
+          <div class="media"><img src="assets/hoodie-koi.jpg" alt="Hoodie Koi" /></div>
+          <div class="info">
+            <div>
+              <h3>Hoodie Koi</h3>
+              <div class="meta">Crème · arbre, carpes, érables</div>
+            </div>
+            <div class="price">89 €</div>
+          </div>
+        </article>
+        <article class="card">
+          <div class="media"><img src="assets/hoodie-cube.jpg" alt="Hoodie Skelter" /></div>
+          <div class="info">
+            <div>
+              <h3>Hoodie Skelter</h3>
+              <div class="meta">Crème · cube couronné</div>
+            </div>
+            <div class="price">89 €</div>
+          </div>
+        </article>
+        <article class="card">
+          <div class="media"><img src="assets/tee-composition.jpg" alt="Tee Composition" /></div>
+          <div class="info">
+            <div>
+              <h3>Tee Composition</h3>
+              <div class="meta">Noir · dos typographique</div>
+            </div>
+            <div class="price">45 €</div>
+          </div>
+        </article>
+        <article class="card">
+          <div class="media"><img src="assets/peace.jpg" alt="Print Peace" /></div>
+          <div class="info">
+            <div>
+              <h3>Print Peace</h3>
+              <div class="meta">Visuel · tee ou hoodie</div>
+            </div>
+            <div class="price">49 €</div>
+          </div>
+        </article>
+        <article class="card">
+          <div class="media"><img src="assets/stritny.jpg" alt="Stritny" /></div>
+          <div class="info">
+            <div>
+              <h3>Stritny</h3>
+              <div class="meta">Collab · Farmeando Aura</div>
+            </div>
+            <div class="price">49 €</div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <div class="split" id="histoire">
+      <img src="assets/logo.jpg" alt="Logo Helter et Skelter" style="object-fit:contain; background:#f7f4ef; padding:48px;" />
+      <div class="split-copy">
+        <div class="eyebrow">La maison</div>
+        <h2>Helter & Skelter</h2>
+        <p>Une marque entre gravure ancienne et rue. Les pièces portent tes visuels, l’étiquette porte ton nom, et le colis part directement chez le client. Pas de stock, pas d’atelier à tenir : seulement la direction artistique.</p>
+        <div class="stats">
+          <div><strong>H&S</strong><span>Monogramme</span></div>
+          <div><strong>01</strong><span>Premier drop</span></div>
+          <div><strong>FR</strong><span>Envoi direct</span></div>
+        </div>
+      </div>
+    </div>
+
+    <section id="lookbook">
+      <div class="section-head">
+        <h2>Lookbook</h2>
+        <p>Dos signature</p>
+      </div>
+      <div class="lookbook">
+        <div class="tall">
+          <img src="assets/hoodie-koi.jpg" alt="Look koi" />
+          <div class="caption">Another Bad Création · Koi</div>
+        </div>
+        <div class="stack">
+          <div class="tile">
+            <img src="assets/tee-composition.jpg" alt="Tee composition" />
+            <div class="caption">Composition · made by hand</div>
+          </div>
+          <div class="tile">
+            <img src="assets/hoodie-cube.jpg" alt="Hoodie cube" />
+            <div class="caption">Skelter · crème</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="drop">
+      <div class="section-head">
+        <h2>Comment ça se vend</h2>
+        <p>Maquette boutique</p>
+      </div>
+      <div class="grid">
+        <article class="card">
+          <div class="info" style="display:block; padding:28px;">
+            <h3>1. Le client choisit</h3>
+            <div class="meta" style="margin-top:10px; line-height:1.6;">Hoodie ou tee, taille, couleur de base. Le visuel est déjà posé sur la pièce.</div>
+          </div>
+        </article>
+        <article class="card">
+          <div class="info" style="display:block; padding:28px;">
+            <h3>2. Tu valides la commande</h3>
+            <div class="meta" style="margin-top:10px; line-height:1.6;">Le fournisseur imprime à ta marque. Étiquette, bon de livraison, colis neutre.</div>
+          </div>
+        </article>
+        <article class="card">
+          <div class="info" style="display:block; padding:28px;">
+            <h3>3. Envoi direct</h3>
+            <div class="meta" style="margin-top:10px; line-height:1.6;">Le colis part chez le client. Toi, tu gardes la marge et la relation.</div>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div>
+      <h4>Helter & Skelter</h4>
+      <p>Another Bad Création.<br />50% harmonie, 50% chaos.</p>
+    </div>
+    <div>
+      <h4>Shop</h4>
+      <a href="#shop">Hoodies</a>
+      <a href="#shop">Tees</a>
+      <a href="#shop">Prints</a>
+    </div>
+    <div>
+      <h4>Maison</h4>
+      <a href="#histoire">Histoire</a>
+      <a href="#lookbook">Lookbook</a>
+      <a href="#shop">Livraison</a>
+    </div>
+    <div>
+      <h4>Contact</h4>
+      <a href="mailto:hello@helterandskelter.fr">hello@helterandskelter.fr</a>
+      <p>Instagram · TikTok</p>
+    </div>
+    <div class="legal">
+      <span>Maquette boutique · non reliée à un paiement</span>
+      <span>© Helter & Skelter</span>
+    </div>
+  </footer>
+  <p class="note">Maquette visuelle. Prix indicatifs. Les visuels Peace et Stritny sont présentés comme prints prêts à poser sur tee ou hoodie.</p>
+</body>
+</html>
